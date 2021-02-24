@@ -1,0 +1,15 @@
+﻿@{ 
+    var type = (string)TempData["_alert.type"];
+    var message = (string)TempData["_alert.message"];
+}
+<div class="alert-container">
+@if (!string.IsNullOrEmpty(message))
+{ 
+    <div class="alert alert alert-@type alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @message
+    </div>
+}
+</div>

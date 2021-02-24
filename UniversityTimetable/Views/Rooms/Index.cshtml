@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Room>
+@{
+    ViewData["Title"] = "Sale";
+}
+
+<h1>Sale: </h1>
+
+<p>
+    <a asp-action="Create" authorization="true">Dodaj salę</a>
+</p>
+
+@{ await Html.RenderPartialAsync("_StatusMessage"); }
+
+<hr />
+
+@if (Model.Count() > 0)
+{
+    @foreach (var item in Model)
+    {
+        <a asp-controller="RoomLessons" asp-action="Index" asp-route-id="@item.Id" class="btn btn-outline-dark btn-lg">
+            @Html.DisplayFor(modelItem => item.Number)
+        </a>
+    }
+
+}
+
+else
+{
+    <b class="mt-5">Brak dodanych sal.</b>
+}

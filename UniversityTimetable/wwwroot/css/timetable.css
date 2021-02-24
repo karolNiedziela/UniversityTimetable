@@ -1,0 +1,28 @@
+﻿.lesson {
+    text-align: center;
+    cursor: pointer;
+
+}
+
+.lesson .add-lesson
+{
+    display:none;
+    margin: auto;
+}
+
+.lesson:hover .add-lesson {
+    display: inline;
+    position: relative;
+}
+
+
+.lesson .manage
+{
+    display: none;
+}
+
+.lesson:hover .manage {
+    display: inline;
+    position: relative;
+    margin: 0 auto;
+}

@@ -1,0 +1,61 @@
+﻿@model Lesson
+
+@{
+    ViewData["Title"] = "Usuń zajęcia";
+}
+
+<h1>Usuwanie zajęć</h1>
+
+<h3>Czy chcesz usunąć zajęcia o podanych poniżej danych?</h3>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.DayId):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Day.Name)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.GroupId):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Group.Name)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.LessonHourId):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.LessonHour.HourName)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.RoomId):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Room.Number)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.SubjectId):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Subject.Name)
+        </dd>
+
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.TeacherId):
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Teacher.FullName)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="submit" class="btn btn-danger" onclick="onDelete()" value="Usuń" />
+        <a class="ml-2" asp-action="Index">Cofnij</a>
+    </form>
+</div>

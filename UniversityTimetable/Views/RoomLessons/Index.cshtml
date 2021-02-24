@@ -1,0 +1,137 @@
+﻿@model UniversityTimetable.ViewModels.RoomTimetableViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/timetable.css" />
+}
+
+@{
+    ViewData["Title"] = "Zajęcia w sali " + Model.Room.Number;
+
+}
+
+
+<h1>Zajęcia w sali @Model.Room.Number</h1>
+
+<p>
+    <a authorization-policy="RequireAdmin" asp-controller="Rooms" asp-action="Edit" asp-route-id="@Model.Room.Id" class="ml-3">Edytuj salę</a>
+    <a authorization-policy="RequireAdmin" asp-controller="Rooms" asp-action="Delete" asp-route-id="@Model.Room.Id" class="ml-3">Usuń salę</a>
+</p>
+
+
+<form asp-action="Index">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    @foreach (var item in Model.Days)
+                    {
+                        <th>
+                            @Html.DisplayFor(modelItem => item.DayName)
+                        </th>
+                    }
+                </tr>
+
+            </thead>
+            <tbody>
+                @foreach (var item in Model.LessonHours)
+                {
+                    <tr>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.HourName)
+                        </th>
+                        @foreach (var value in Model.Days)
+                        {
+
+                            <td class="lesson">
+                                @if (Model.Lessons.Any(l => l.LessonHourId == item.Id && l.DayId == value.Id))
+                                {
+                                    var lesson = Model.Lessons.SingleOrDefault(l => l.LessonHourId == item.Id && l.DayId == value.Id);
+                                    <h5>@lesson.Subject.Name</h5>
+                                    <h6>@lesson.Teacher.TitleIncluded</h6>
+                                    <h6>grupa @lesson.Group.Name</h6>
+
+                                    @*   <div class="manage" authorization="true">
+                                            <a class="edit-lesson" asp-action="Edit" asp-route-id="@lesson.Id">Edytuj</a>
+                                            <a class="delete-lesson ml-2" asp-action="Delete" asp-route-id="@lesson.Id">Usuń</a>
+                                        </div>*@
+                                }
+                                else
+                                {
+                                    @*<button authorization="true" class="add-lesson btn" asp-route-lessonHourId="@item.Id" asp-route-dayId="@value.Id" asp-route-groupId="@Model.Group.Id"><i class="fa fa-plus" aria-hidden="true"></i> </button>*@
+                                }
+
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>
+
+<a class="mt-5" asp-controller="Rooms" asp-action="Index">Cofnij</a>
+
+@*@if (Model.Lessons.Count() > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().DayId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().GroupId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().LessonHourId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().SubjectId)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lessons.FirstOrDefault().TeacherId)
+                    </th>
+                    <th authorization-policy="RequireAdmin">Zarządzaj</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Lessons)
+                {
+
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Day.DayName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Group.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LessonHour.HourName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Subject.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Teacher.TitleIncluded)
+                        </td>
+                        <td>
+                            <a authorization="true" asp-controller="Lessons" asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
+                            <a authorization-policy="RequireAdmin" asp-controller="Lessons" asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <b>Brak zajęć w tej sali.</b>
+    }
+
+    <div>
+        <a class="mt-5" asp-controller="Rooms" asp-action="Index">Cofnij</a>
+    </div>*@
