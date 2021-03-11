@@ -1,6 +1,6 @@
 # UniversityTimetable
 Web app supporting the creation of university plan. The project was created during university internship. Functionalities include adding lectureres, student groups, subjects, 
-lesson hours. The main goal was to enable the facilitate the process of preparing plans.
+lesson hours. The main goal was to make the process of preparing plans easier.
 
 # Technologies
  * ASP.NET Core MVC
